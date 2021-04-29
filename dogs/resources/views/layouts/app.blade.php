@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>@yield('title')</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -25,7 +25,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    DogsHouse
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -40,7 +40,6 @@
                         <div class="links">
                             <a href="http://127.0.0.1:8000/">Home</a>
                             <a href="http://127.0.0.1:8000/notices/">Ogłoszenia</a>
-                            <a href="http://127.0.0.1:8000/notices/creat/">Dodaj Ogłoszenie</a>
                         </div>
 
                     </ul>
@@ -64,6 +63,8 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+                                    <a class="dropdown-item" href="{{ route('home') }}">Profil</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -84,7 +85,7 @@
         <main class="py-4">
             @yield('content')
         </main>
-        <footer>Copyright 2021 Dogo House</footer>
+        <!-- <footer>Copyright 2021 Dogo House</footer> --!>
     </div>
 </body>
 </html>

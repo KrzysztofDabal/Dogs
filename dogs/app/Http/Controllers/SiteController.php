@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Notices;
+use App\Reply;
 
 class SiteController extends Controller
 {
@@ -27,7 +28,7 @@ class SiteController extends Controller
         return view('sites.creat');
     }
 
-    public function store(){
+    public function store_notice(){
         $notice = new Notices();
 
         $notice->user = request('user');
@@ -45,6 +46,19 @@ class SiteController extends Controller
         $notice->save();
 
         return redirect('/notices/')->with('mssg', 'Twoje Ogłoszenie zostalo dodane');
+    }
+
+    public function store_reply(){
+        $reply = new Reply();
+
+        $reply->sender_id = request('sender_id');
+        $reply->receiver_id = request('receiver_id');
+        $reply->notice_id = request('notice_id');
+        $reply->reply = request('reply');
+
+        $reply->save();
+
+        return redirect('/notices/')->with('mssg', 'Twoja Odpowiedź została wysłana');
     }
 
     public function destroy($id){

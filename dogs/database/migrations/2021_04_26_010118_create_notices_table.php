@@ -17,6 +17,7 @@ class CreateNoticesTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('user');
+            $table->integer('user_id');
             $table->string('name');
             $table->string('type');
             $table->string('race');

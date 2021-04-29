@@ -18,7 +18,8 @@ Route::get('/notices', 'SiteController@index');
 Route::get('/notices/creat', 'SiteController@creat');
 Route::get('/notices/{id}', 'SiteController@show');
 
-Route::post('/notices', 'SiteController@store');
+Route::post('/notices', 'SiteController@store_notice');
+Route::post('/reply', 'SiteController@store_reply');
 
 Route::delete('/notices/{id}', 'SiteController@destroy');
 

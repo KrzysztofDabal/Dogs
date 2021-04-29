@@ -13,8 +13,7 @@
             </div>
             <form action="/notices/" method="POST"> <br>
                 @csrf
-                <label for="user">Twój Nick: </label> <br>
-                <input type="text" id="user" name="user"> <br>
+                <input type="hidden" id="user" name="user" value="{{ Auth::user()->name }}">
                 <label for="name">Imię Psa: </label> <br>
                 <input type="text" id="name" name="name"> <br>
                 <label for="type">Rodzaj Psa: </label> <br>
