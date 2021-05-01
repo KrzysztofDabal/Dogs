@@ -17,13 +17,13 @@
         <div>
             @foreach($notices as $notice)
                 <div class="notice">
-                    <div class="links flex-center">
+                    <div class="links">
+                        <a href="http://127.0.0.1:8000/notices/{{ $notice->id }}/">
+                            {{ $notice->title }}
+                        </a><br/>
                         <img src="/img/doghouse.png" width="140px" height="100px">
                         {{ $notice->user }} - {{ $notice->name }} - {{ $notice->type }} - {{ $notice->race }} - {{ $notice->age }} - {{ $notice->date }} - {{ $notice->location }}<br/>
 
-                        <a href="http://127.0.0.1:8000/notices/{{ $notice->id }}">
-                            Zobacz
-                        </a>
                     </div>
                 </div>
             @endforeach

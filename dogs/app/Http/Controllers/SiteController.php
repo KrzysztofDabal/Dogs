@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Notices;
 use App\Reply;
+use Illuminate\Support\Facades\Auth;
 
 class SiteController extends Controller
 {
@@ -15,7 +16,8 @@ class SiteController extends Controller
         return view('sites.notices', ['notices' => $notices]);
     }
 
-    public function show($id){
+    public function show(){
+        $id =2;
         $notices = Notices::findOrFail($id);
 
         return view('sites.show_notice', [
@@ -30,8 +32,11 @@ class SiteController extends Controller
 
     public function store_notice(){
         $notice = new Notices();
+        $user = Auth::id();
 
         $notice->user = request('user');
+        $notice->user_id = $user;
+        $notice->title = request('title');
         $notice->type = request('type');
         $notice->race = request('race');
         $notice->name = request('name');
@@ -51,7 +56,8 @@ class SiteController extends Controller
     public function store_reply(){
         $reply = new Reply();
 
-        $reply->sender_id = request('sender_id');
+        $user = Auth::id();
+        $reply->sender_id = $user;
         $reply->receiver_id = request('receiver_id');
         $reply->notice_id = request('notice_id');
         $reply->reply = request('reply');
@@ -65,6 +71,15 @@ class SiteController extends Controller
         $notice = Notices::findOrFail($id);
         $notice->delete();
 
-        return redirect('/notices/');
+        return redirect('/dashboard/');
+    }
+
+    public function dashboard(){
+        $user = Auth::id();
+        $notices = Notices::where('user_id', $user)->get();
+
+        return view('sites.dashboard', [
+            'notices' => $notices
+        ]);
     }
 }
