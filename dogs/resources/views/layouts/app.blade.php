@@ -41,6 +41,7 @@
                             <a href="http://127.0.0.1:8000/">Home</a>
                             <a href="http://127.0.0.1:8000/notices/">Ogłoszenia</a>
                             <a href="http://127.0.0.1:8000/regulamin/">Regulamin</a>
+                            <a href="http://127.0.0.1:8000/description/">O stronie</a>
                         </div>
 
                     </ul>
@@ -65,7 +66,9 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
-                                    <a class="dropdown-item" href="{{ route('dashboard') }}">Profil</a>
+                                    <a class="dropdown-item" href="{{ route('profile') }}">Profil</a>
+                                    <a class="dropdown-item" href="{{ route('dashboard') }}">Tablica</a>
+                                    <a class="dropdown-item" href="{{ route('messages') }}">Wiadomości</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

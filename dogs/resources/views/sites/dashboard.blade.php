@@ -12,11 +12,15 @@
                 <a href="http://127.0.0.1:8000/notices/{{ $notice->id }}/">
                     {{ $notice->title }}
                 </a>
+                <a href="http://127.0.0.1:8000/notices/edit/{{ $notice->id }}/">
+                    Edytuj
+                </a>
                 <form action="/notices/{{ $notice->id }}/" method="POST">
                     @csrf
                     @method('DELETE')
                     <button>Usuń</button>
                 </form>
+
             </div>
         </div>
     @endforeach

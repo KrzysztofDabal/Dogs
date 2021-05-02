@@ -16,12 +16,18 @@ use views\sites;
 Route::get('/', function () {return view('sites.index');})->name('index');
 Route::get('/notices', 'SiteController@index')->name('notices');
 Route::get('/notices/creat', 'SiteController@creat')->middleware('auth');
-Route::get('/notices/{id}', 'SiteController@show');
+Route::get('/notices/edit/{id}', 'SiteController@edit')->middleware('auth');
+Route::get('/notices/{id}', 'SiteController@show_notice');
 Route::get('/dashboard', 'SiteController@dashboard')->middleware('auth')->name('dashboard');
 Route::get('/regulamin/',  function () {return view('sites.regulamin');})->name('regulamin');
+Route::get('/description/',  function () {return view('sites.description');})->name('description');
+Route::get('/profile', 'SiteController@profile')->middleware('auth')->name('profile');
+Route::get('/messages', 'SiteController@messages')->middleware('auth')->name('messages');
+Route::get('/messages/{id}', 'SiteController@show_message')->middleware('auth');
 
-Route::post('/notices', 'SiteController@store_notice');
-Route::post('/reply', 'SiteController@store_reply');
+Route::post('/create', 'SiteController@store_notice');
+Route::post('/notices/edit/{id}', 'SiteController@update_notice');
+Route::post('/messages', 'SiteController@store_message');
 
 Route::delete('/notices/{id}', 'SiteController@destroy')->middleware('auth');
 

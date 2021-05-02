@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Notices;
-use App\Reply;
+use App\Messages;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 
 class SiteController extends Controller
@@ -15,13 +16,16 @@ class SiteController extends Controller
 
         return view('sites.notices', ['notices' => $notices]);
     }
+    public function profile(){
 
-    public function show(){
-        $id =2;
-        $notices = Notices::findOrFail($id);
+        return view('sites.profile');
+    }
+
+    public function show_notice($id){
+        $notice = Notices::findOrFail($id);
 
         return view('sites.show_notice', [
-            'notices' => $notices
+            'notices' => $notice
         ]);
 
     }
@@ -32,16 +36,19 @@ class SiteController extends Controller
 
     public function store_notice(){
         $notice = new Notices();
-        $user = Auth::id();
+        $id = Auth::id();
+        $user = User::findOrFail($id);
+        $name = $user->name;
 
-        $notice->user = request('user');
-        $notice->user_id = $user;
+
+        $notice->user = $name;
+        $notice->user_id = $id;
         $notice->title = request('title');
         $notice->type = request('type');
         $notice->race = request('race');
         $notice->name = request('name');
         $notice->age = request('age');
-        $notice->price = request('price');
+        $notice->reward = request('reward');
         $notice->description = request('description');
         $date = request('date');
         $time = request('time');
@@ -53,33 +60,89 @@ class SiteController extends Controller
         return redirect('/notices/')->with('mssg', 'Twoje Ogłoszenie zostalo dodane');
     }
 
-    public function store_reply(){
-        $reply = new Reply();
-
-        $user = Auth::id();
-        $reply->sender_id = $user;
-        $reply->receiver_id = request('receiver_id');
-        $reply->notice_id = request('notice_id');
-        $reply->reply = request('reply');
-
-        $reply->save();
-
-        return redirect('/notices/')->with('mssg', 'Twoja Odpowiedź została wysłana');
-    }
-
     public function destroy($id){
         $notice = Notices::findOrFail($id);
-        $notice->delete();
+        if($notice->user_id==Auth::id())
+        {
+            $notice->delete();
+        }
 
         return redirect('/dashboard/');
     }
 
     public function dashboard(){
         $user = Auth::id();
-        $notices = Notices::where('user_id', $user)->get();
+        $notice = Notices::where('user_id', $user)->get();
 
         return view('sites.dashboard', [
-            'notices' => $notices
+            'notices' => $notice
         ]);
+    }
+
+    public function edit($id){
+        $notice = Notices::findOrFail($id);
+        if($notice->user_id==Auth::id()){
+
+            return view('sites.edit', [
+                'notices' => $notice
+            ]);
+        }
+        else{
+            return redirect('/dashboard/');
+        }
+
+    }
+    public function update_notice($id){
+        $notice = Notices::findOrFail($id);
+        if($notice->user_id==Auth::id()){
+            $notice->title = request('title');
+            $notice->type = request('type');
+            $notice->race = request('race');
+            $notice->name = request('name');
+            $notice->age = request('age');
+            $notice->reward = request('reward');
+            $notice->description = request('description');
+            $date = request('date');
+            $time = request('time');
+            $notice->date = $date.' '.$time;
+            $notice->location = request('location');
+
+            $notice->save();
+        }
+
+        return redirect('/dashboard/');
+
+    }
+
+    public function messages(){
+        $user = Auth::id();
+        $messages = Messages::where('receiver_id', $user)->get();
+        $notices = Notices::all();
+
+        return view('sites.messages', compact('messages', 'notices', 'user'));
+
+    }
+
+    public function show_message($id){
+        $message = Messages::findOrFail($id);
+        $notice = Notices::findOrFail($message->notice_id);
+        $user = User::findOrFail($message->sender_id);
+
+        return view('sites.show_message', compact('message', 'notice', 'user'));
+
+    }
+
+    public function store_message(){
+        $message = new Messages();
+        $user = Auth::id();
+
+        $message->sender_id = $user;
+        $message->receiver_id = request('receiver_id');
+        $message->notice_id = request('notice_id');
+        $message->message = request('message');
+
+        $message->save();
+
+        return redirect('/notices/')->with('mssg', 'Twoja Odpowiedź została wysłana');
     }
 }

@@ -106,7 +106,10 @@ footer {
   border-bottom: #295218 2px dashed;
 }
 
-.top-bc {
-    background-color: #cdffc0;
+button {
+    background-color: #04AA6D;
+    color: white;
+    font-size: smaller;
+    border: none;
+    cursor: pointer;
 }
-

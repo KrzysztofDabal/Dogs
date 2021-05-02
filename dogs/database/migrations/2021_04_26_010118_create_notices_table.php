@@ -23,7 +23,7 @@ class CreateNoticesTable extends Migration
             $table->string('type');
             $table->string('race');
             $table->integer('age');
-            $table->integer('price');
+            $table->integer('reward');
             $table->string('description');
             $table->dateTime('date');
             $table->string('location');
