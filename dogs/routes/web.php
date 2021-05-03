@@ -23,11 +23,13 @@ Route::get('/regulamin/',  function () {return view('sites.regulamin');})->name(
 Route::get('/description/',  function () {return view('sites.description');})->name('description');
 Route::get('/profile', 'SiteController@profile')->middleware('auth')->name('profile');
 Route::get('/messages', 'SiteController@messages')->middleware('auth')->name('messages');
+Route::get('/messagessend', 'SiteController@messages_send')->middleware('auth')->name('messages_send');
 Route::get('/messages/{id}', 'SiteController@show_message')->middleware('auth');
 
 Route::post('/create', 'SiteController@store_notice');
 Route::post('/notices/edit/{id}', 'SiteController@update_notice');
-Route::post('/messages', 'SiteController@store_message');
+Route::post('/message', 'SiteController@store_message');
+Route::post('/conversation', 'SiteController@store_conversation');
 
 Route::delete('/notices/{id}', 'SiteController@destroy')->middleware('auth');
 

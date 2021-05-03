@@ -69,6 +69,7 @@
                                     <a class="dropdown-item" href="{{ route('profile') }}">Profil</a>
                                     <a class="dropdown-item" href="{{ route('dashboard') }}">Tablica</a>
                                     <a class="dropdown-item" href="{{ route('messages') }}">Wiadomości</a>
+                                    <a class="dropdown-item" href="{{ route('messages_send') }}">Wysłane</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

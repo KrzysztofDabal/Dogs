@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Notices;
 use App\Messages;
 use App\User;
+use App\Conversations;
 use Illuminate\Support\Facades\Auth;
 
 class SiteController extends Controller
@@ -116,33 +117,84 @@ class SiteController extends Controller
 
     public function messages(){
         $user = Auth::id();
-        $messages = Messages::where('receiver_id', $user)->get();
+        $conversations = Conversations::where('receiver_id', $user)->get();
         $notices = Notices::all();
 
-        return view('sites.messages', compact('messages', 'notices', 'user'));
+        return view('sites.messages', compact('conversations', 'notices'));
+
+    }
+
+    public function messages_send(){
+        $user = Auth::id();
+        $conversations = Conversations::where('sender_id', $user)->get();
+        $notices = Notices::all();
+
+        return view('sites.messages', compact('conversations', 'notices'));
 
     }
 
     public function show_message($id){
-        $message = Messages::findOrFail($id);
-        $notice = Notices::findOrFail($message->notice_id);
-        $user = User::findOrFail($message->sender_id);
+        $conversation = Conversations::findOrFail($id);
+        $notice = Notices::findOrFail($conversation->notice_id);
+        $messages = Messages::where('conversation_id', $conversation->id)->get();
 
-        return view('sites.show_message', compact('message', 'notice', 'user'));
+        return view('sites.show_message', compact('conversation', 'messages', 'notice'));
 
+    }
+
+    public function store_conversation(){
+        $exist = false;
+        $conversations = Conversations::all();
+        $user = Auth::id();
+        $name = User::findOrFail($user);
+        $message = new Messages();
+        $id = 0;
+        for($i=0; $i<count($conversations); $i++){
+            if($conversations->notice_id=request('notice_id')){
+                $exist = true;
+                $id = $conversations[$i]->id;
+            }
+        }
+        if($exist==false){
+            $conversation = new Conversations();
+
+            $conversation->sender_id = $user;
+            $conversation->receiver_id = request('receiver_id');
+            $conversation->notice_id = request('notice_id');
+            $conversation->save();
+
+            $message->sender_id = $user;
+            $message->sender_name = $name->name;
+            $message->conversation_id = request('conversation_id');
+            $message->message = request('message');
+
+            $message->save();
+
+        }
+        else{
+            $message->sender_id = $user;
+            $message->sender_name = $name->name;
+            $message->conversation_id = $id;
+            $message->message = request('message');
+
+            $message->save();
+        }
+
+        return redirect('/notices/')->with('mssg', 'Twoja Odpowiedź została wysłana');
     }
 
     public function store_message(){
         $message = new Messages();
         $user = Auth::id();
+        $name = User::findOrFail($user);
 
         $message->sender_id = $user;
-        $message->receiver_id = request('receiver_id');
-        $message->notice_id = request('notice_id');
+        $message->sender_name = $name->name;
+        $message->conversation_id = request('conversation_id');
         $message->message = request('message');
 
         $message->save();
 
-        return redirect('/notices/')->with('mssg', 'Twoja Odpowiedź została wysłana');
+        return redirect('/messages/'.$message->conversation_id.'/');
     }
 }

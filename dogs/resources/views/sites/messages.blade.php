@@ -6,10 +6,10 @@
 
 @section('messages')
     @foreach($notices as $notice)
-        @foreach($messages as $message)
-            @if($message->notice_id==$notice->id)
+        @foreach($conversations as $conversation)
+            @if($conversation->notice_id==$notice->id)
                 <div class="links flex-center">
-                    <a href="http://127.0.0.1:8000/messages/{{ $message->id }}/">
+                    <a href="http://127.0.0.1:8000/messages/{{ $conversation->id }}/">
                         {{ $notice->title }}
                     </a>
                 </div>
