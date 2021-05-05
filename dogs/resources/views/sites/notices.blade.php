@@ -4,6 +4,32 @@
     Ogłoszenia
 @endsection
 
+
+@section('notices')
+    @foreach($notices as $notice)
+        <a href="http://127.0.0.1:8000/notices/{{ $notice->id }}/"></a>
+        <div>
+            <tr>
+                <td>
+                    <img src="/img/doghouse.png" width="140px" height="100px">
+                </td>
+                <td>
+                    <a href="http://127.0.0.1:8000/notices/{{ $notice->id }}/">{{ $notice->title }}</a>
+                </td>
+                <td>
+                    {{ $notice->user }}
+                </td>
+                <td>
+                    {{ $notice->location }}
+                </td>
+                <td>
+                    {{ $notice->date }}
+                </td>
+            </tr>
+        </div>
+    @endforeach
+@endsection
+
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -19,17 +45,19 @@
                             </div>
                         @endif
 
-                        @foreach($notices as $notice)
-                            <div class="">
-                                <div class="links">
-                                    <a href="http://127.0.0.1:8000/notices/{{ $notice->id }}/">
-                                        {{ $notice->title }}
-                                    </a><br/>
-                                    <img src="/img/doghouse.png" width="140px" height="100px">
-                                    {{ $notice->user }} - {{ $notice->name }} - {{ $notice->type }} - {{ $notice->race }} - {{ $notice->age }} - {{ $notice->date }} - {{ $notice->location }}<br/>
-                                </div>
-                            </div>
-                        @endforeach
+                        <div class="">
+                            <table class="table table-hover">
+                                <tr>
+                                    <td></td>
+                                    <td>Tytuł</td>
+                                    <td width="90">Autor</td>
+                                    <td>Lokacja</td>
+                                    <td>Data</td>
+
+                                </tr>
+                                @yield('notices')
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

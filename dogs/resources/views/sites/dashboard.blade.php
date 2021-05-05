@@ -4,24 +4,40 @@
     Dogs House - Tablica
 @endsection
 
-@section('dashboard')
+@section('notices')
     @foreach($notices as $notice)
-        <div class="notice">
-            <div class="links flex-center">
-                <img src="/img/doghouse.png" width="140px" height="100px">
-                <a href="http://127.0.0.1:8000/notices/{{ $notice->id }}/">
-                    {{ $notice->title }}
-                </a>
-                <a href="http://127.0.0.1:8000/notices/edit/{{ $notice->id }}/">
-                    Edytuj
-                </a>
-                <form action="/notices/{{ $notice->id }}/" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button>Usuń</button>
-                </form>
-
-            </div>
+        <a href="http://127.0.0.1:8000/notices/{{ $notice->id }}/"></a>
+        <div>
+            <tr>
+                <td>
+                    <a href="http://127.0.0.1:8000/notices/{{ $notice->id }}/">
+                        {{ $notice->title }}<br/>
+                        <img src="/img/doghouse.png" width="140px" height="100px">
+                    </a>
+                </td>
+                <td>
+                    {{ $notice->user }}
+                </td>
+                <td>
+                    {{ $notice->location }}
+                </td>
+                <td>
+                    {{ $notice->date }}
+                </td>
+                <td>
+                    <form action="/notices/edit/{{ $notice->id }}/" method="GET">
+                        @csrf
+                        <button class="btn btn-primary">Edytuj</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="/notices/{{ $notice->id }}/" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger">Usuń</button>
+                    </form>
+                </td>
+            </tr>
         </div>
     @endforeach
 @endsection
@@ -32,8 +48,11 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        <h5>{{ __('Twoja tablica ogłoszeń') }}<br/></h5>
-                        <a href="http://127.0.0.1:8000/notices/creat/">+Dodaj nowe ogłoszenie</a>
+                        <h5>Tablica<br/></h5>
+                        <form action="/notices/creat" method="GET">
+                            @csrf
+                            <button class="btn btn-success">Dodaj ogłoszenie</button>
+                        </form>
                     </div>
                     <div class="card-body">
                         @if (session('status'))
@@ -41,8 +60,20 @@
                                 {{ session('status') }}
                             </div>
                         @endif
+                        <div class="">
+                            <table class="table table-hover">
+                                <tr>
+                                    <td>Tytuł</td>
+                                    <td width="90">Autor</td>
+                                    <td>Lokacja</td>
+                                    <td>Data</td>
+                                    <td></td>
+                                    <td></td>
 
-                        @yield('dashboard')
+                                </tr>
+                                @yield('notices')
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

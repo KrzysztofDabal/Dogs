@@ -132,6 +132,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\laragon\www\dogs\resources\views\heaven" />
       <recent name="D:\laragon\www\dogs\resources\views\sites" />
     </key>
   </component>
@@ -161,6 +162,8 @@
       <workItem from="1619921984151" duration="2052000" />
       <workItem from="1619955521053" duration="8796000" />
       <workItem from="1620044827577" duration="9179000" />
+      <workItem from="1620134367845" duration="4039000" />
+      <workItem from="1620154257498" duration="7630000" />
     </task>
     <servers />
   </component>
@@ -176,10 +179,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="765" y="306" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1620067880490" />
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1619969638968">
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1620165180356">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1619969638968" />
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1620165180356" />
     <state x="787" y="243" key="NewPhpClassDialog" timestamp="1619725588936">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -188,9 +191,13 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1619269530033" />
-    <state x="616" y="240" key="run.anything.popup" timestamp="1620073035349">
+    <state x="616" y="240" key="run.anything.popup" timestamp="1620165539977">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1620073035349" />
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1620165539977" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1620150542703">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1620150542703" />
   </component>
 </project>

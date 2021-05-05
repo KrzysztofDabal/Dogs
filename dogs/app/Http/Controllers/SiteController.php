@@ -8,22 +8,36 @@ use App\Messages;
 use App\User;
 use App\Conversations;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Mockery\Matcher\Not;
 
 class SiteController extends Controller
 {
     public function index(){
 
-        $notices = Notices::all();
+        $notices = Notices::orderBy('id', 'ASC')->paginate(20);
 
         return view('sites.notices', ['notices' => $notices]);
     }
+
+    public function check_role(){
+        $user = Auth::id();
+        $name = User::findOrFail($user);
+
+        if($name->role==1){
+            return true;
+        }
+        else return false;
+
+    }
+
     public function profile(){
 
         return view('sites.profile');
     }
 
     public function show_notice($id){
-        $notice = Notices::findOrFail($id);
+        $notice = Notices::findOrFail($id);;
 
         return view('sites.show_notice', [
             'notices' => $notice
@@ -63,12 +77,26 @@ class SiteController extends Controller
 
     public function destroy($id){
         $notice = Notices::findOrFail($id);
-        if($notice->user_id==Auth::id())
+        if($notice->user_id==Auth::id()||$this->check_role()==true)
         {
             $notice->delete();
         }
 
         return redirect('/dashboard/');
+    }
+
+    public function edit($id){
+        $notice = Notices::findOrFail($id);
+        if($notice->user_id==Auth::id()||$this->check_role()==true){
+
+            return view('sites.edit', [
+                'notices' => $notice
+            ]);
+        }
+        else{
+            return redirect('/dashboard/');
+        }
+
     }
 
     public function dashboard(){
@@ -80,19 +108,6 @@ class SiteController extends Controller
         ]);
     }
 
-    public function edit($id){
-        $notice = Notices::findOrFail($id);
-        if($notice->user_id==Auth::id()){
-
-            return view('sites.edit', [
-                'notices' => $notice
-            ]);
-        }
-        else{
-            return redirect('/dashboard/');
-        }
-
-    }
     public function update_notice($id){
         $notice = Notices::findOrFail($id);
         if($notice->user_id==Auth::id()){
@@ -117,16 +132,12 @@ class SiteController extends Controller
 
     public function messages(){
         $user = Auth::id();
-        $conversations = Conversations::where('receiver_id', $user)->get();
-        $notices = Notices::all();
+        //$conversations = Conversations::where('receiver_id', $user)->get();
+        $conversations = DB::table('conversations')
+            ->where('receiver_id', '=', $user)
+            ->orWhere('sender_id', '=', $user)
+            ->get();
 
-        return view('sites.messages', compact('conversations', 'notices'));
-
-    }
-
-    public function messages_send(){
-        $user = Auth::id();
-        $conversations = Conversations::where('sender_id', $user)->get();
         $notices = Notices::all();
 
         return view('sites.messages', compact('conversations', 'notices'));
@@ -196,5 +207,36 @@ class SiteController extends Controller
         $message->save();
 
         return redirect('/messages/'.$message->conversation_id.'/');
+    }
+
+    public function heaven(){
+        if($this->check_role()==true){
+            return view('heaven.heaven');
+        }
+        else{
+            return redirect('/');
+        }
+    }
+
+    public function heaven_notices(){
+        if($this->check_role()==false){
+            return redirect('/');
+        }
+        else{
+            $notices = Notices::orderBy('id', 'ASC')->paginate(20);
+
+            return view('heaven.heaven_notices', ['notices' => $notices]);
+        }
+    }
+
+    public function heaven_users(){
+        if($this->check_role()==false){
+            return redirect('/');
+        }
+        else{
+            $users = User::orderBy('id', 'ASC')->paginate(20);
+
+            return view('heaven.heaven_users', ['users' => $users]);
+        }
     }
 }

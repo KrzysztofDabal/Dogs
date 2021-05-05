@@ -13,26 +13,49 @@ use views\sites;
 |
 */
 
-Route::get('/', function () {return view('sites.index');})->name('index');
-Route::get('/notices', 'SiteController@index')->name('notices');
-Route::get('/notices/creat', 'SiteController@creat')->middleware('auth');
-Route::get('/notices/edit/{id}', 'SiteController@edit')->middleware('auth');
-Route::get('/notices/{id}', 'SiteController@show_notice');
-Route::get('/dashboard', 'SiteController@dashboard')->middleware('auth')->name('dashboard');
-Route::get('/regulamin/',  function () {return view('sites.regulamin');})->name('regulamin');
-Route::get('/description/',  function () {return view('sites.description');})->name('description');
-Route::get('/profile', 'SiteController@profile')->middleware('auth')->name('profile');
-Route::get('/messages', 'SiteController@messages')->middleware('auth')->name('messages');
-Route::get('/messagessend', 'SiteController@messages_send')->middleware('auth')->name('messages_send');
-Route::get('/messages/{id}', 'SiteController@show_message')->middleware('auth');
+Route::get('/', function () {return view('sites.index');})
+    ->name('index');
+Route::get('/notices/', 'SiteController@index')
+    ->name('notices');
+Route::get('/notices/creat/', 'SiteController@creat')
+    ->middleware('auth');
+Route::get('/notices/edit/{id}/', 'SiteController@edit')
+    ->middleware('auth');
+Route::get('/notices/{id}/', 'SiteController@show_notice');
+Route::get('/dashboard/', 'SiteController@dashboard')
+    ->middleware('auth')
+    ->name('dashboard');
+Route::get('/regulamin/',  function () {return view('sites.regulamin');})
+    ->name('regulamin');
+Route::get('/description/',  function () {return view('sites.description');})
+    ->name('description');
+Route::get('/profile', 'SiteController@profile')
+    ->middleware('auth')
+    ->name('profile');
+Route::get('/messages/', 'SiteController@messages')
+    ->middleware('auth')
+    ->name('messages');
+Route::get('/messages/{id}', 'SiteController@show_message')
+    ->middleware('auth');
+Route::get('/dogoheaven/', 'SiteController@heaven')
+    ->middleware('auth')
+    ->name('heaven');
+Route::get('/dogoheaven/notices/', 'SiteController@heaven_notices')
+    ->middleware('auth')
+    ->name('heaven_notices');
+Route::get('/dogoheaven/users/', 'SiteController@heaven_users')
+    ->middleware('auth')
+    ->name('heaven_users');
 
-Route::post('/create', 'SiteController@store_notice');
-Route::post('/notices/edit/{id}', 'SiteController@update_notice');
-Route::post('/message', 'SiteController@store_message');
-Route::post('/conversation', 'SiteController@store_conversation');
+Route::post('/create/', 'SiteController@store_notice');
+Route::post('/notices/edit/{id}/', 'SiteController@update_notice');
+Route::post('/message/', 'SiteController@store_message');
+Route::post('/conversation/', 'SiteController@store_conversation');
 
-Route::delete('/notices/{id}', 'SiteController@destroy')->middleware('auth');
+Route::delete('/notices/{id}', 'SiteController@destroy')
+    ->middleware('auth');
 
 Auth::routes();
 
-Route::get('/home', 'SiteController@index')->name('home');
+Route::get('/home/', 'SiteController@index')
+    ->name('home');
