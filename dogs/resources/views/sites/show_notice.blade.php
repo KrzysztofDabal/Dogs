@@ -5,7 +5,7 @@
 @endsection
 
 @section('message')
-    <form action="/conversation/" method="POST"> <br>
+    <form action="{{ route('conversation.create') }}" method="POST"> <br>
         @csrf
         <input type="hidden" id="receiver_id" name="receiver_id" value="{{ $notices->user_id }}">
         <input type="hidden" id="notice_id" name="notice_id" value="{{ $notices->id }}">

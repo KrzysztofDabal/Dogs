@@ -6,11 +6,11 @@
 
 @section('notices')
     @foreach($notices as $notice)
-        <a href="http://127.0.0.1:8000/notices/{{ $notice->id }}/"></a>
+        <a href="{{ route('notices.show', $notice->id) }}"></a>
         <div>
             <tr>
                 <td>
-                    <a href="http://127.0.0.1:8000/notices/{{ $notice->id }}/">
+                    <a href="{{ route('notices.show', $notice->id) }}">
                         {{ $notice->title }}<br/>
                         <img src="/img/doghouse.png" width="140px" height="100px">
                     </a>
@@ -25,13 +25,13 @@
                     {{ $notice->date }}
                 </td>
                 <td>
-                    <form action="/notices/edit/{{ $notice->id }}/" method="GET">
+                    <form action="{{ route('notices.edit', $notice->id) }}" method="GET">
                         @csrf
                         <button class="btn btn-primary">Edytuj</button>
                     </form>
                 </td>
                 <td>
-                    <form action="/notices/{{ $notice->id }}/" method="POST">
+                    <form action="{{ route('notices.destroy', $notice->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-danger">Usuń</button>
@@ -49,7 +49,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h5>Tablica<br/></h5>
-                        <form action="/notices/creat" method="GET">
+                        <form action="{{ route('notices.create') }}" method="GET">
                             @csrf
                             <button class="btn btn-success">Dodaj ogłoszenie</button>
                         </form>

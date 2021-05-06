@@ -7,14 +7,14 @@
 
 @section('notices')
     @foreach($notices as $notice)
-        <a href="http://127.0.0.1:8000/notices/{{ $notice->id }}/"></a>
+        <a href="{{ route('notices.show', $notice->id) }}"></a>
         <div>
             <tr>
                 <td>
                     <img src="/img/doghouse.png" width="140px" height="100px">
                 </td>
                 <td>
-                    <a href="http://127.0.0.1:8000/notices/{{ $notice->id }}/">{{ $notice->title }}</a>
+                    <a href="{{ route('notices.show', $notice->id) }}">{{ $notice->title }}</a>
                 </td>
                 <td>
                     {{ $notice->user }}

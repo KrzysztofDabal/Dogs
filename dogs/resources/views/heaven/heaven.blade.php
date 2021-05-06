@@ -19,8 +19,8 @@
 
                 Witamy w psim niebie<br/>
                 Czym chcesz zarządzać<br/>
-                <a href="{{ route('heaven_notices') }}">Ogłoszenia</a><br/>
-                <a href="{{ route('heaven_users') }}">Użytkownicy</a><br/>
+                <a href="{{ route('heaven.notices.index') }}">Ogłoszenia</a><br/>
+                <a href="{{ route('heaven.users.index') }}">Użytkownicy</a><br/>
                 @yield('heaven')
             </div>
         </div>

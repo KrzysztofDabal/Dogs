@@ -6,7 +6,7 @@
 
 @section('message')
     <div class="card-header">
-        <form action="/message/" method="POST"> <br>
+        <form action="{{ route('messages.create') }}" method="POST"> <br>
             @csrf
             <input type="hidden" id="sender_id" name="sender_id" value="{{ $conversation->sender_id }}">
             <input type="hidden" id="conversation_id" name="conversation_id" value="{{ $conversation->id }}">
@@ -23,10 +23,10 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <a href="http://127.0.0.1:8000/notices/{{ $notice->id }}/">
+                    <a href="{{ route('notices.show', $notice->id) }}">
                         <h5>{{ $notice->title }}<br/></h5>
                     </a>
-                    <a href="http://127.0.0.1:8000/messages/">
+                    <a href="{{ route('messages.index') }}">
                         <- powrót do wiadomości<br/>
                     </a>
                 </div>
@@ -45,7 +45,12 @@
                                 {{ $message->sender_name }}
                             </div>
                             @endif
-                                |{{ $message->created_at->format('H:i:s') }}| . {{ $message->message }}<br>
+                                <div class="">
+                                        |{{ $message->created_at->format('H:i:s') }}|
+
+                                        {{ $message->message }}
+                                </div>
+                                  <br>
                                 <?php
                                 $value =$message->sender_id;
                                 ?>

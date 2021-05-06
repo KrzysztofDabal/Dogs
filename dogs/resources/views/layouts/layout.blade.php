@@ -15,9 +15,10 @@
     <div class="flex-center position-ref">
 
         <div class="links">
-            <a href="http://127.0.0.1:8000/">Home</a>
-            <a href="http://127.0.0.1:8000/notices/">Ogłoszenia</a>
-            <a href="http://127.0.0.1:8000/notices/creat/">Dodaj Ogłoszenie</a>
+            <a href="{{ route('index') }}">Home</a>
+            <a href="{{ route('notices') }}">Ogłoszenia</a>
+            <a href="{{ route('regulations') }}">Regulamin</a>
+            <a href="{{ route('description') }}">O stronie</a>
         </div>
 
     </div>

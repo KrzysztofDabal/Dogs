@@ -28,7 +28,6 @@ class SiteController extends Controller
             return true;
         }
         else return false;
-
     }
 
     public function profile(){
@@ -72,29 +71,29 @@ class SiteController extends Controller
 
         $notice->save();
 
-        return redirect('/notices/')->with('mssg', 'Twoje Ogłoszenie zostalo dodane');
+        return redirect(route('notices.index'))->with('mssg', 'Twoje Ogłoszenie zostalo dodane');
     }
 
-    public function destroy($id){
+    public function notice_destroy($id){
         $notice = Notices::findOrFail($id);
-        if($notice->user_id==Auth::id()||$this->check_role()==true)
+        if($notice->user_id==Auth::id())
         {
             $notice->delete();
         }
 
-        return redirect('/dashboard/');
+        return redirect(route('dashboard'));
     }
 
     public function edit($id){
         $notice = Notices::findOrFail($id);
-        if($notice->user_id==Auth::id()||$this->check_role()==true){
+        if($notice->user_id==Auth::id()){
 
             return view('sites.edit', [
                 'notices' => $notice
             ]);
         }
         else{
-            return redirect('/dashboard/');
+            return redirect(route('dashboard'));
         }
 
     }
@@ -126,13 +125,12 @@ class SiteController extends Controller
             $notice->save();
         }
 
-        return redirect('/dashboard/');
+        return redirect(route('dashboard'));
 
     }
 
     public function messages(){
         $user = Auth::id();
-        //$conversations = Conversations::where('receiver_id', $user)->get();
         $conversations = DB::table('conversations')
             ->where('receiver_id', '=', $user)
             ->orWhere('sender_id', '=', $user)
@@ -191,7 +189,7 @@ class SiteController extends Controller
             $message->save();
         }
 
-        return redirect('/notices/')->with('mssg', 'Twoja Odpowiedź została wysłana');
+        return redirect(route('notices.index'))->with('mssg', 'Twoja Odpowiedź została wysłana');
     }
 
     public function store_message(){
@@ -206,37 +204,6 @@ class SiteController extends Controller
 
         $message->save();
 
-        return redirect('/messages/'.$message->conversation_id.'/');
-    }
-
-    public function heaven(){
-        if($this->check_role()==true){
-            return view('heaven.heaven');
-        }
-        else{
-            return redirect('/');
-        }
-    }
-
-    public function heaven_notices(){
-        if($this->check_role()==false){
-            return redirect('/');
-        }
-        else{
-            $notices = Notices::orderBy('id', 'ASC')->paginate(20);
-
-            return view('heaven.heaven_notices', ['notices' => $notices]);
-        }
-    }
-
-    public function heaven_users(){
-        if($this->check_role()==false){
-            return redirect('/');
-        }
-        else{
-            $users = User::orderBy('id', 'ASC')->paginate(20);
-
-            return view('heaven.heaven_users', ['users' => $users]);
-        }
+        return redirect(route('messages.show', $message->conversation_id));
     }
 }

@@ -38,10 +38,10 @@
                     </ul>
                     <ul class="navbar-nav m-auto">
                         <div class="links">
-                            <a href="http://127.0.0.1:8000/">Home</a>
-                            <a href="http://127.0.0.1:8000/notices/">Ogłoszenia</a>
-                            <a href="http://127.0.0.1:8000/regulamin/">Regulamin</a>
-                            <a href="http://127.0.0.1:8000/description/">O stronie</a>
+                            <a href="{{ route('index') }}">Home</a>
+                            <a href="{{ route('notices.index') }}">Ogłoszenia</a>
+                            <a href="{{ route('regulations') }}">Regulamin</a>
+                            <a href="{{ route('description') }}">O stronie</a>
                         </div>
 
                     </ul>
@@ -68,7 +68,7 @@
 
                                     <a class="dropdown-item" href="{{ route('profile') }}">Profil</a>
                                     <a class="dropdown-item" href="{{ route('dashboard') }}">Tablica</a>
-                                    <a class="dropdown-item" href="{{ route('messages') }}">Wiadomości</a>
+                                    <a class="dropdown-item" href="{{ route('messages.index') }}">Wiadomości</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

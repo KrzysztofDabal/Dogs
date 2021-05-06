@@ -19,13 +19,15 @@
                 </td>
                 <td>
                     @if($user->role==1)
-                        <form action="/notices/edit/{{ $user->id }}/" method="POST">
+                        <form action="/notices/edit/role/{{ $user->id }}/" method="POST">
                             @csrf
+                            <input type="text" id="role" name="role" value="0" hidden>
                             <button class="btn btn-danger">Odbierz admina</button>
                         </form>
                     @else
-                        <form action="/notices/edit/{{ $user->id }}/" method="POST">
+                        <form action="/notices/edit/role/{{ $user->id }}/" method="POST">
                             @csrf
+                            <input type="text" id="role" name="role" value="1" hidden>
                             <button class="btn btn-success">Nadaj admina</button>
                         </form>
                     @endif

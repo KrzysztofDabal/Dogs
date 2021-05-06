@@ -11,7 +11,7 @@
                 <div class="card">
                     <div class="card-header">Formularz Ogłoszenia</div>
                     <div class="card-body">
-                        <form action="/create/" method="POST"> <br>
+                        <form action="{{ route('notices.update') }}" method="POST"> <br>
                             @csrf
                             <label for="name">Tytul ogłoszenia: </label> <br>
                             <input type="text" id="title" name="title" class="form-control"> <br>

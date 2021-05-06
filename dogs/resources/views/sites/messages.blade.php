@@ -9,7 +9,7 @@
         @foreach($conversations as $conversation)
             @if($conversation->notice_id==$notice->id)
                 <div class="links flex-center">
-                    <a href="http://127.0.0.1:8000/messages/{{ $conversation->id }}/">
+                    <a href="{{ route('messages.show', $conversation->id) }}">
                         {{ $notice->title }}
                     </a>
                 </div>
