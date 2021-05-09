@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.heaven_layout')
 
 @section('title')
     Edycja Ogłoszenia - Tytuł ogłoszenia
@@ -11,10 +11,10 @@
                 <div class="card">
                     <div class="card-header">
                         <h5>Formularz Ogłoszenia</h5>
-                        <a href="{{ route('dashboard') }}"><- wróć</a>
+                        <a href="{{ route('heaven.notices.index') }}"><- wróć do listy ogłoszeń</a>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('notices.update', $notice->id) }}" method="POST"> <br>
+                        <form action="{{ route('heaven.notices.update', $notice->id) }}" method="POST"> <br>
                             @csrf
                             <label for="name">Tytul ogłoszenia: </label> <br>
                             <input type="text" id="title" name="title" value="{{ $notice->title }}" class="form-control"> <br>

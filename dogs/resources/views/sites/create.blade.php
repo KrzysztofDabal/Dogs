@@ -9,9 +9,11 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Formularz Ogłoszenia</div>
+                    <div class="card-header">
+                        <h5>Formularz Ogłoszenia</h5>
+                    </div>
                     <div class="card-body">
-                        <form action="{{ route('notices.update') }}" method="POST"> <br>
+                        <form action="{{ route('notices.store') }}" method="POST"> <br>
                             @csrf
                             <label for="name">Tytul ogłoszenia: </label> <br>
                             <input type="text" id="title" name="title" class="form-control"> <br>
@@ -47,4 +49,3 @@
         </div>
     </div>
 @endsection
-

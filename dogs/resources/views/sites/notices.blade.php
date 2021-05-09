@@ -16,9 +16,11 @@
                 <td>
                     <a href="{{ route('notices.show', $notice->id) }}">{{ $notice->title }}</a>
                 </td>
-                <td>
-                    {{ $notice->user }}
-                </td>
+                @foreach($users as $user)
+                    @if($user->id == $notice->user_id)
+                        <td>{{ $user->name }}</td>
+                    @endif
+                @endforeach
                 <td>
                     {{ $notice->location }}
                 </td>
@@ -44,13 +46,23 @@
                                 {{ session('status') }}
                             </div>
                         @endif
+                        <form action="{{ route('notices.index') }}" method="GET">
+                            @csrf
+                            <button class="btn btn-info">Odświerz</button>
+                        </form>
+                        <form action="{{ route('notices.filtr') }}" method="POST">
+                            @csrf
+                            <label>Wyszukaj po lokalizacji</label>
+                            <input type="text" id="filtr" name="filtr">
+                            <button class="btn btn-info">Wyszukaj</button>
+                        </form>
 
                         <div class="">
                             <table class="table table-hover">
                                 <tr>
                                     <td></td>
                                     <td>Tytuł</td>
-                                    <td width="90">Autor</td>
+                                    <td>Autor</td>
                                     <td>Lokacja</td>
                                     <td>Data</td>
 

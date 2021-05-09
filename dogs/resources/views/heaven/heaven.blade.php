@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="col-md-8">
+    <div class="col-md-12">
         <div class="card">
             <div class="card-header">
                 <h5>Dogo Heaven<br/></h5>

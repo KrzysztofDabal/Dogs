@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Notices;
 use App\Messages;
@@ -14,25 +15,26 @@ use Mockery\Matcher\Not;
 class SiteController extends Controller
 {
     public function index(){
-
+        $users = User::all();
         $notices = Notices::orderBy('id', 'ASC')->paginate(20);
 
-        return view('sites.notices', ['notices' => $notices]);
+        return view('sites.notices', compact('notices', 'users'));
     }
+    public function filtr(){
+        $users = User::all();
+        $notices = Notices::orderBy('id', 'ASC')
+            ->where('location', '=', \request('filtr'))
+            ->paginate(20);
 
-    public function check_role(){
-        $user = Auth::id();
-        $name = User::findOrFail($user);
-
-        if($name->role==1){
-            return true;
-        }
-        else return false;
+        return view('sites.notices', compact('notices', 'users'));
     }
 
     public function profile(){
-
         return view('sites.profile');
+    }
+
+    public function create(){
+        return view('sites.create');
     }
 
     public function show_notice($id){
@@ -42,10 +44,6 @@ class SiteController extends Controller
             'notices' => $notice
         ]);
 
-    }
-
-    public function creat(){
-        return view('sites.creat');
     }
 
     public function store_notice(){
@@ -86,11 +84,12 @@ class SiteController extends Controller
 
     public function edit($id){
         $notice = Notices::findOrFail($id);
+        $carbon = new Carbon($notice->date);
+        $time = $carbon->toTimeString();
+        $date = $carbon->toDateString();
         if($notice->user_id==Auth::id()){
 
-            return view('sites.edit', [
-                'notices' => $notice
-            ]);
+            return view('sites.edit', compact('notice', 'date', 'time'));
         }
         else{
             return redirect(route('dashboard'));
@@ -146,8 +145,9 @@ class SiteController extends Controller
         $conversation = Conversations::findOrFail($id);
         $notice = Notices::findOrFail($conversation->notice_id);
         $messages = Messages::where('conversation_id', $conversation->id)->get();
+        $users = User::all();
 
-        return view('sites.show_message', compact('conversation', 'messages', 'notice'));
+        return view('sites.show_message', compact('conversation', 'messages', 'notice', 'users'));
 
     }
 

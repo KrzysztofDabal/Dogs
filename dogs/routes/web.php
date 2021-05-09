@@ -22,11 +22,12 @@ Route::get('/dashboard/', 'SiteController@dashboard')->middleware('auth')->name(
 
 //noticess
 Route::get('/notices/', 'SiteController@index')->name('notices.index');
-Route::get('/notices/creat/', 'SiteController@creat')->middleware('auth')->name('notices.create');
+Route::POST('/notices/', 'SiteController@filtr')->name('notices.filtr');
+Route::get('/notices/create/', 'SiteController@create')->middleware('auth')->name('notices.create');
 Route::get('/notices/edit/{id}/', 'SiteController@edit')->middleware('auth')->name('notices.edit');
 Route::post('/notices/edit/{id}/', 'SiteController@update_notice')->middleware('auth')->name('notices.update');
-Route::get('/notices/{id}/', 'SiteController@show_notice')->middleware('auth')->name('notices.show');
 Route::post('/notices/store/', 'SiteController@store_notice')->middleware('auth')->name('notices.store');
+Route::get('/notices/{id}/', 'SiteController@show_notice')->name('notices.show');
 Route::delete('/notices/{id}', 'SiteController@notice_destroy')->middleware('auth')->name('notices.destroy');
 
 
@@ -38,15 +39,22 @@ Route::post('/message/', 'SiteController@store_message')->middleware('auth')->na
 
 
 //heaven
-Route::get('/heaven/', 'HeavenController@heaven')->middleware('auth')->name('heaven.index');
+Route::get('/heaven/', 'HeavenController@index')->name('heaven.index');
 //heaven notices
-Route::get('/heaven/notices/', 'HeavenController@heaven_notices')->middleware('auth')->name('heaven.notices.index');
-Route::get('/heaven/notices/edit/{id}', 'HeavenController@heaven_edit')->middleware('auth')->name('heaven.notices.edit');
-Route::post('/heaven/notices/edit/{id}/', 'HeavenController@heaven_update_notice')->middleware('auth')->name('heaven.notices.update');
-Route::delete('/heaven/notices/{id}', 'HeavenController@heaven_notice_destroy')->middleware('auth')->name('heaven.notices.destroy');
+Route::get('/heaven/notices/', 'HeavenController@notices_index')->name('heaven.notices.index');
+Route::get('/heaven/notices/create/', 'HeavenController@notice_create')->name('heaven.notices.create');
+Route::post('/heaven/notices/create/', 'HeavenController@notice_store')->name('heaven.notices.store');
+Route::get('/heaven/notices/edit/{id}', 'HeavenController@notice_edit')->name('heaven.notices.edit');
+Route::post('/heaven/notices/edit/{id}/', 'HeavenController@notice_update')->name('heaven.notices.update');
+Route::delete('/heaven/notices/{id}', 'HeavenController@notice_destroy')->name('heaven.notices.destroy');
 //heaven users
-Route::get('/heaven/users/', 'HeavenController@heaven_users')->middleware('auth')->middleware('auth')->name('heaven.users.index');
-Route::post('/heaven/users/edit/role/{id}/', 'SiteController@heaven_set_role')->middleware('auth')->name('heaven');
+Route::get('/heaven/users/', 'HeavenController@users_index')->middleware('auth')->name('heaven.users.index');
+Route::get('/heaven/users/create', 'HeavenController@user_create')->name('heaven.users.create');
+Route::post('/heaven/users/create', 'HeavenController@user_store')->name('heaven.users.store');
+Route::get('/heaven/users/edit/{id}', 'HeavenController@user_edit')->name('heaven.users.edit');
+Route::post('/heaven/users/edit/{id}', 'HeavenController@user_update')->name('heaven.users.update');
+Route::post('/heaven/users/edit/role/{id}/', 'HeavenController@set_role')->name('heaven.users.edit.role');
+Route::delete('/heaven/users/{id}/', 'HeavenController@user_destroy')->name('heaven.users.destroy');
 
 
 Auth::routes();
