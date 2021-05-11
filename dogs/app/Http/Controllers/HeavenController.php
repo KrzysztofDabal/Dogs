@@ -67,8 +67,11 @@ class HeavenController extends Controller
 
     public function notice_store(){
         $notice = new Notices();
+        $user = User::findOrFail(request('id'));
+        $name = $user->name;
 
         $notice->user_id = request('id');
+        $notice->user = $name;
         $notice->title = request('title');
         $notice->type = request('type');
         $notice->race = request('race');

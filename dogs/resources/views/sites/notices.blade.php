@@ -11,7 +11,7 @@
         <div>
             <tr>
                 <td>
-                    <img src="/img/doghouse.png" width="140px" height="100px">
+                    <img src="/img/doghouse.png" alt="notice img" width="140px" height="100px">
                 </td>
                 <td>
                     <a href="{{ route('notices.show', $notice->id) }}">{{ $notice->title }}</a>
@@ -48,7 +48,7 @@
                         @endif
                         <form action="{{ route('notices.index') }}" method="GET">
                             @csrf
-                            <button class="btn btn-info">Odświerz</button>
+                            <button class="btn btn-info">Odśwież</button>
                         </form>
                         <form action="{{ route('notices.filtr') }}" method="POST">
                             @csrf
@@ -70,6 +70,7 @@
                                 @yield('notices')
                             </table>
                         </div>
+                            {{ $notices-> links() }}
                     </div>
                 </div>
             </div>

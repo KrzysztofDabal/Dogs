@@ -16,7 +16,7 @@ class SiteController extends Controller
 {
     public function index(){
         $users = User::all();
-        $notices = Notices::orderBy('id', 'ASC')->paginate(20);
+        $notices = Notices::orderBy('id', 'ASC')->paginate(7);
 
         return view('sites.notices', compact('notices', 'users'));
     }
@@ -24,7 +24,7 @@ class SiteController extends Controller
         $users = User::all();
         $notices = Notices::orderBy('id', 'ASC')
             ->where('location', '=', \request('filtr'))
-            ->paginate(20);
+            ->paginate(7);
 
         return view('sites.notices', compact('notices', 'users'));
     }

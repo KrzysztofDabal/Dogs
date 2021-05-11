@@ -9,7 +9,7 @@
         @csrf
         <input type="hidden" id="receiver_id" name="receiver_id" value="{{ $notices->user_id }}">
         <input type="hidden" id="notice_id" name="notice_id" value="{{ $notices->id }}">
-        <label for="description">Odpowiedz na ogłoszenei: </label> <br>
+        <label for="description">Odpowiedz na ogłoszenie: </label> <br>
         <input type="text" id="message" name="message"> <br>
         <input type="submit" value="Wyślij">
     </form>
@@ -22,7 +22,7 @@
         <div class="content">
 
             <div>
-                <img src="/img/doghouse.png" width="420px" height="300px"><br/>
+                <img src="{{ $notices->img }}" width="420px" height="300px"><br/>
                 <h1>{{ $notices->title }}</h1>
                 <div class="detail">
                     <div class="">

@@ -135,6 +135,9 @@
       <recent name="D:\laragon\www\dogs\resources\views\heaven" />
       <recent name="D:\laragon\www\dogs\resources\views\sites" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\laragon\www\dogs" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
@@ -168,6 +171,15 @@
       <workItem from="1620306012745" duration="14836000" />
       <workItem from="1620383919224" duration="12608000" />
       <workItem from="1620476669010" duration="4398000" />
+      <workItem from="1620604378540" duration="714000" />
+      <workItem from="1620643713844" duration="785000" />
+      <workItem from="1620665927773" duration="695000" />
+      <workItem from="1620685975830" duration="443000" />
+      <workItem from="1620698281428" duration="117000" />
+      <workItem from="1620699295523" duration="775000" />
+      <workItem from="1620727972007" duration="3344000" />
+      <workItem from="1620738481408" duration="274000" />
+      <workItem from="1620738899001" duration="857000" />
     </task>
     <servers />
   </component>
@@ -187,10 +199,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1620434344451" />
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1620165180356">
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1620739445709">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1620165180356" />
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1620739445709" />
     <state x="787" y="243" key="NewPhpClassDialog" timestamp="1619725588936">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -199,10 +211,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1619269530033" />
-    <state x="172" y="99" width="585" height="801" key="find.popup" timestamp="1620437907361">
+    <state x="172" y="99" width="585" height="801" key="find.popup" timestamp="1620604440993">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="172" y="99" width="585" height="801" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1620437907361" />
+    <state x="172" y="99" width="585" height="801" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1620604440993" />
     <state x="616" y="240" key="run.anything.popup" timestamp="1620165539977">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
